@@ -31,6 +31,7 @@ http://127.0.0.1:8765
 ## ✨ Funkcje
 
 - profile RGB,
+- interfejs PL/EN z przełącznikiem języka,
 - tworzenie, duplikowanie, zmiana nazwy i usuwanie profili użytkownika,
 - profile chronione `FINAL` i `CODZIENNY`,
 - pełne sterowanie RGB per-key — niezależne kolorowanie poszczególnych klawiszy z wizualnego edytora,
@@ -132,7 +133,7 @@ Nie należy zakładać zgodności mapowania LED z innymi modelami ASUS.
 
 ## 🚧 Status
 
-Aktualna wersja: **v1.3**
+Aktualna wersja: **v1.4**
 
 ---
 
@@ -156,6 +157,7 @@ http://127.0.0.1:8765
 ## ✨ Features
 
 - multiple RGB profiles,
+- PL/EN interface with a language switcher,
 - create, duplicate, rename and delete user profiles,
 - protected `FINAL` and `CODZIENNY` profiles,
 - full per-key RGB keyboard colouring — individually configurable key colours through a visual editor,
@@ -258,7 +260,7 @@ Do not assume that its LED mapping is compatible with other ASUS models.
 
 ## 🚧 Status
 
-Current version: **v1.3**
+Current version: **v1.4**
 
 ---
 

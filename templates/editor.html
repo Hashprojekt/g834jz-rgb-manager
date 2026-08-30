@@ -10,28 +10,37 @@
   <main class="editor-shell">
     <header class="editor-header">
       <div class="editor-title">
-        <a class="back-link" href="/">← Profile</a>
-        <div><span class="eyebrow">EDYTOR RGB</span><h1>{{ profile.name }}</h1></div>
+        <a class="back-link" href="/" data-i18n="back_profiles">← Profile</a>
+        <div><span class="eyebrow" data-i18n="rgb_editor">EDYTOR RGB</span><h1>{{ profile.name }}</h1></div>
       </div>
       <div class="editor-header-actions">
+        <div class="language-switch" aria-label="Language">
+          <button type="button" class="lang-button" data-lang="pl">PL</button>
+          <span>/</span>
+          <button type="button" class="lang-button" data-lang="en">EN</button>
+        </div>
         <span class="version">v{{ app_version }}</span>
-        <button class="button" id="undoBtn">↶ Cofnij</button>
-        <button class="button" id="redoBtn">↷ Ponów</button>
-        <a class="button" href="/api/profiles/{{ profile.id }}/export">Eksportuj</a>
+        <button class="button" id="undoBtn" data-i18n="undo">↶ Cofnij</button>
+        <button class="button" id="redoBtn" data-i18n="redo">↷ Ponów</button>
+        <a class="button" href="/api/profiles/{{ profile.id }}/export" data-i18n="export_editor">Eksportuj</a>
       </div>
     </header>
 
     <section class="editor-toolbar card">
-      <div class="selection-summary"><span>Wybrane klawisze</span><strong id="selectionCount">0</strong><small id="selectionNames">Kliknij klawisze poniżej</small></div>
+      <div class="selection-summary">
+        <span data-i18n="selected_keys">Wybrane klawisze</span>
+        <strong id="selectionCount">0</strong>
+        <small id="selectionNames" data-i18n="click_keys">Kliknij klawisze poniżej</small>
+      </div>
       <div class="colour-control">
-        <input type="color" id="colourPicker" value="#0050ff" aria-label="Kolor">
+        <input type="color" id="colourPicker" value="#0050ff" aria-label="Kolor" data-i18n-aria-label="colour">
         <input type="text" id="hexInput" value="#0050FF" maxlength="7" spellcheck="false">
         <div class="rgb-inputs">
           <input id="rInput" type="number" min="0" max="255" value="0" title="R">
           <input id="gInput" type="number" min="0" max="255" value="80" title="G">
           <input id="bInput" type="number" min="0" max="255" value="255" title="B">
         </div>
-        <button class="button primary" id="applyBtn">Zastosuj</button>
+        <button class="button primary" id="applyBtn" data-i18n="apply">Zastosuj</button>
       </div>
       <div class="quick-colours" id="quickColours"></div>
     </section>
@@ -39,58 +48,60 @@
     <section class="editor-grid">
       <div class="keyboard-column">
         <div class="groupbar card">
-          <span class="muted">Zaznacz:</span>
+          <span class="muted" data-i18n="select_label">Zaznacz:</span>
           <button class="chip" data-group="wasd">WASD</button>
           <button class="chip" data-group="numbers">1–0</button>
           <button class="chip" data-group="functions">F1–F12</button>
           <button class="chip" data-group="letters">A–Z</button>
-          <button class="chip" data-group="arrows">Strzałki</button>
-          <button class="chip" data-group="modifiers">Modyfikatory</button>
-          <button class="chip" data-group="numpad">Numpad cały</button>
-          <button class="chip" data-group="numpad_ops">Operatory numpada</button>
-          <button class="chip" id="allMappedBtn">Wszystkie dostępne</button>
-          <button class="chip" id="clearSelectionBtn">Wyczyść</button>
+          <button class="chip" data-group="arrows" data-i18n="arrows">Strzałki</button>
+          <button class="chip" data-group="modifiers" data-i18n="modifiers">Modyfikatory</button>
+          <button class="chip" data-group="numpad" data-i18n="full_numpad">Numpad cały</button>
+          <button class="chip" data-group="numpad_ops" data-i18n="numpad_ops">Operatory numpada</button>
+          <button class="chip" id="allMappedBtn" data-i18n="all_available">Wszystkie dostępne</button>
+          <button class="chip" id="clearSelectionBtn" data-i18n="clear">Wyczyść</button>
         </div>
 
         <div class="keyboard-card card">
           <div class="keyboard-legend">
-            <span><i class="legend-dot editable"></i>edytowalny</span>
-            <span><i class="legend-dot dynamic"></i>dynamiczny</span>
-            <span><i class="legend-dot unknown"></i>brak bezpiecznego mapowania</span>
+            <span><i class="legend-dot editable"></i><span data-i18n="editable">edytowalny</span></span>
+            <span><i class="legend-dot dynamic"></i><span data-i18n="dynamic">dynamiczny</span></span>
+            <span><i class="legend-dot unknown"></i><span data-i18n="no_safe_mapping">brak bezpiecznego mapowania</span></span>
           </div>
-          <div class="keyboard-section-label">ROG / F1–F12</div>
+          <div class="keyboard-section-label" data-i18n="rog_fkeys">ROG / F1–F12</div>
           <div id="functionKeyboard" class="keyboard function-keyboard"></div>
-          <div class="keyboard-section-label main-label">Klawiatura główna + numpad</div>
+          <div class="keyboard-section-label main-label" data-i18n="main_keyboard_numpad">Klawiatura główna + numpad</div>
           <div id="keyboard" class="keyboard main-keyboard"></div>
         </div>
       </div>
 
       <aside class="side-column">
         <section class="card side-card">
-          <div class="side-title"><div><span class="eyebrow">PALETA PROFILU</span><h2>Kolory</h2></div><span class="muted" id="paletteCount"></span></div>
-          <p class="muted compact">Kliknij kolor, aby zaznaczyć klawisze używające go. Zmiana palety działa tylko na bezpiecznie zmapowanych klawiszach.</p>
+          <div class="side-title">
+            <div>
+              <span class="eyebrow" data-i18n="profile_palette">PALETA PROFILU</span>
+              <h2 data-i18n="colours">Kolory</h2>
+            </div>
+            <span class="muted" id="paletteCount"></span>
+          </div>
+          <p class="muted compact" data-i18n="palette_help">Kliknij kolor, aby zaznaczyć klawisze używające go. Zmiana palety działa tylko na bezpiecznie zmapowanych klawiszach.</p>
           <div id="palette" class="palette-compact"></div>
         </section>
 
         <section class="card side-card">
-          <span class="eyebrow">WARSTWA DYNAMICZNA</span>
-          <h2>Chronione LED-y</h2>
+          <span class="eyebrow" data-i18n="dynamic_layer">WARSTWA DYNAMICZNA</span>
+          <h2 data-i18n="protected_leds">Chronione LED-y</h2>
           <div class="locked-list">
-            <div><strong>M3</strong><span>RTX / temperatura</span></div>
-            <div><strong>M4</strong><span>profil ASUS</span></div>
-            <div><strong>M5</strong><span>CPU / temperatura</span></div>
-            <div><strong>HOME</strong><span>profil ASUS</span></div>
+            <div><strong>M3</strong><span data-i18n="gpu_temperature">RTX / temperatura</span></div>
+            <div><strong>M4</strong><span data-i18n="profile_asus_lower">profil ASUS</span></div>
+            <div><strong>M5</strong><span data-i18n="cpu_temperature">CPU / temperatura</span></div>
+            <div><strong>HOME</strong><span data-i18n="profile_asus_lower">profil ASUS</span></div>
           </div>
         </section>
       </aside>
     </section>
   </main>
 
-  <div id="toast" class="toast" hidden></div>
-  <script src="/static/common.js"></script>
-  <script src="/static/editor.js"></script>
-
-<footer class="app-footer">
+  <footer class="app-footer">
     © 2026 <strong>BartoszSiemczyn</strong>
     <span>·</span>
     G834JZ RGB Manager
@@ -98,7 +109,11 @@
     <a href="https://github.com/Hashprojekt/g834jz-rgb-manager"
        target="_blank"
        rel="noopener noreferrer">GitHub</a>
-</footer>
+  </footer>
 
+  <div id="toast" class="toast" hidden></div>
+  <script src="/static/i18n.js"></script>
+  <script src="/static/common.js"></script>
+  <script src="/static/editor.js"></script>
 </body>
 </html>

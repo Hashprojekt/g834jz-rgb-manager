@@ -18,7 +18,7 @@ from flask import Flask, jsonify, render_template, request, send_file
 
 app = Flask(__name__)
 
-APP_VERSION = "1.3.1"
+APP_VERSION = "1.4"
 
 HOME = Path.home()
 APP_DATA = HOME / ".local/share/g834jz-rgb-manager"

@@ -55,3 +55,41 @@ button,input,select{font:inherit}.shell{width:min(1240px,calc(100% - 36px));marg
     text-decoration: underline;
     opacity: 1;
 }
+
+
+/* PL / EN language switch */
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 7px;
+  border: 1px solid var(--border, #2d333b);
+  border-radius: 999px;
+  background: rgba(255,255,255,.025);
+  font-size: .76rem;
+  font-weight: 700;
+}
+
+.language-switch > span {
+  opacity: .35;
+}
+
+.lang-button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  opacity: .45;
+  padding: 2px 4px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.lang-button:hover {
+  opacity: .85;
+}
+
+.lang-button.active {
+  opacity: 1;
+  color: #4d91ff;
+}

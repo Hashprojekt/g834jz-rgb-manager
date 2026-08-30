@@ -12,18 +12,23 @@
       <div>
         <div class="eyebrow">ASUS ROG STRIX</div>
         <h1>G834JZ Control Center</h1>
-        <p class="muted">RGB, temperatury, wentylatory i profile ASUS</p>
+        <p class="muted" data-i18n="app_subtitle">RGB, temperatury, wentylatory i profile ASUS</p>
       </div>
       <div class="top-actions">
+        <div class="language-switch" aria-label="Language">
+          <button type="button" class="lang-button" data-lang="pl">PL</button>
+          <span>/</span>
+          <button type="button" class="lang-button" data-lang="en">EN</button>
+        </div>
         <span class="version">v{{ app_version }}</span>
-        <button class="button primary" id="newProfileBtn">＋ Nowy profil</button>
+        <button class="button primary" id="newProfileBtn" data-i18n="new_profile">＋ Nowy profil</button>
       </div>
     </header>
 
     <section class="status-panel">
       <article class="metric"><span>CPU</span><strong id="cpu">—</strong></article>
       <article class="metric"><span>RTX 4080</span><strong id="gpu">—</strong></article>
-      <article class="metric metric-action"><span>Profil ASUS</span><strong id="asus">—</strong><button class="button small" id="asusNext">Przełącz</button></article>
+      <article class="metric metric-action"><span data-i18n="asus_profile">Profil ASUS</span><strong id="asus">—</strong><button class="button small" id="asusNext" data-i18n="switch">Przełącz</button></article>
       <article class="metric"><span>RGB</span><strong id="rgb">—</strong><small id="serviceState">—</small></article>
       <article class="metric"><span>CPU FAN</span><strong id="fanCpu">—</strong></article>
       <article class="metric"><span>GPU FAN</span><strong id="fanGpu">—</strong></article>
@@ -32,8 +37,8 @@
 
     <section class="section-heading">
       <div>
-        <h2>Profile RGB</h2>
-        <p class="muted">FINAL i CODZIENNY są chronione. Pozostałe możesz edytować lub kopiować.</p>
+        <h2 data-i18n="profiles_heading">Profile RGB</h2>
+        <p class="muted" data-i18n="profiles_info">FINAL i CODZIENNY są chronione. Pozostałe możesz edytować lub kopiować.</p>
       </div>
     </section>
 
@@ -42,18 +47,23 @@
 
   <dialog id="profileDialog" class="dialog">
     <form method="dialog" class="dialog-card" id="newProfileForm">
-      <div class="dialog-title"><div><span class="eyebrow">NOWY PROFIL</span><h2>Utwórz profil RGB</h2></div><button class="icon-button" value="cancel">×</button></div>
-      <label>Nazwa<input id="newProfileName" maxlength="60" placeholder="np. Gaming" required></label>
-      <label>Profil bazowy<select id="newProfileBase"></select></label>
-      <div class="dialog-actions"><button class="button" value="cancel">Anuluj</button><button class="button primary" type="submit" value="default">Utwórz</button></div>
+      <div class="dialog-title">
+        <div>
+          <span class="eyebrow" data-i18n="new_profile_eyebrow">NOWY PROFIL</span>
+          <h2 data-i18n="create_rgb_profile">Utwórz profil RGB</h2>
+        </div>
+        <button class="icon-button" value="cancel">×</button>
+      </div>
+      <label><span data-i18n="name">Nazwa</span><input id="newProfileName" maxlength="60" placeholder="np. Gaming" data-i18n-placeholder="profile_name_placeholder" required></label>
+      <label><span data-i18n="base_profile">Profil bazowy</span><select id="newProfileBase"></select></label>
+      <div class="dialog-actions">
+        <button class="button" value="cancel" data-i18n="cancel">Anuluj</button>
+        <button class="button primary" type="submit" value="default" data-i18n="create">Utwórz</button>
+      </div>
     </form>
   </dialog>
 
-  <div id="toast" class="toast" hidden></div>
-  <script src="/static/common.js"></script>
-  <script src="/static/dashboard.js"></script>
-
-<footer class="app-footer">
+  <footer class="app-footer">
     © 2026 <strong>BartoszSiemczyn</strong>
     <span>·</span>
     G834JZ RGB Manager
@@ -61,7 +71,11 @@
     <a href="https://github.com/Hashprojekt/g834jz-rgb-manager"
        target="_blank"
        rel="noopener noreferrer">GitHub</a>
-</footer>
+  </footer>
 
+  <div id="toast" class="toast" hidden></div>
+  <script src="/static/i18n.js"></script>
+  <script src="/static/common.js"></script>
+  <script src="/static/dashboard.js"></script>
 </body>
 </html>
