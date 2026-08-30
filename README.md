@@ -11,6 +11,16 @@ Local RGB, hardware monitoring and ASUS performance profile manager for the
 
 ---
 
+## 📸 Screenshots / Zrzuty ekranu
+
+### Dashboard / Panel główny
+
+![G834JZ RGB Manager - dashboard](docs/screenshots/dashboard-pl-01.png)
+
+### RGB profile editor / Edytor profilu RGB
+
+![G834JZ RGB Manager - RGB profile editor](docs/screenshots/dashboard-pl-02.png)
+
 # 🇵🇱 Polski
 
 ## O projekcie
