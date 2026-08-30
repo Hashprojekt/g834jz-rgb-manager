@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -e
+
+PROFILE="/sys/firmware/acpi/platform_profile"
+STATE="${XDG_RUNTIME_DIR:-/tmp}/g834jz-gamemode-prev-profile"
+
+CURRENT="$(cat "$PROFILE")"
+
+# Zapamiętujemy profil tylko raz.
+# Nie nadpisujemy go, gdy kilka procesów gry korzysta z GameMode.
+if [ ! -f "$STATE" ]; then
+    printf '%s\n' "$CURRENT" > "$STATE"
+fi
+
+# Na tym G834JZ:
+# low-power   = CICHY
+# balanced    = PERFORMANCE
+# performance = TURBO
+#
+# asusctl profile next jest już potwierdzone jako działające.
+for _ in 1 2 3; do
+    CURRENT="$(cat "$PROFILE")"
+
+    [ "$CURRENT" = "performance" ] && break
+
+    /usr/bin/asusctl profile next >/dev/null
+    sleep 0.4
+done
+
+CURRENT="$(cat "$PROFILE")"
+
+if [ "$CURRENT" != "performance" ]; then
+    echo "Nie udało się przełączyć ASUS-a na TURBO." >&2
+    exit 1
+fi
+
+/usr/bin/notify-send \
+    "ASUS ROG — GameMode" \
+    "Gra uruchomiona → TURBO" 2>/dev/null || true

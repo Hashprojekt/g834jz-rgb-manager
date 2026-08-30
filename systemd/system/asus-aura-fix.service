@@ -1,0 +1,14 @@
+[Unit]
+Description=ASUS Aura fix (logo off, rear off, lightbar on)
+After=asusd.service
+Wants=asusd.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/asusctl aura power logo
+ExecStart=/usr/bin/asusctl aura power rear-glow
+ExecStart=/usr/bin/asusctl aura power lightbar --boot --awake --sleep --shutdown
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

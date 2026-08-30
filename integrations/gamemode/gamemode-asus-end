@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+set -e
+
+PROFILE="/sys/firmware/acpi/platform_profile"
+STATE="${XDG_RUNTIME_DIR:-/tmp}/g834jz-gamemode-prev-profile"
+
+# Jeśli z jakiegoś powodu brak zapisanego stanu,
+# bezpiecznie wracamy do balanced = PERFORMANCE.
+if [ -f "$STATE" ]; then
+    PREVIOUS="$(cat "$STATE")"
+else
+    PREVIOUS="balanced"
+fi
+
+case "$PREVIOUS" in
+    low-power|balanced|performance)
+        ;;
+    *)
+        PREVIOUS="balanced"
+        ;;
+esac
+
+for _ in 1 2 3; do
+    CURRENT="$(cat "$PROFILE")"
+
+    [ "$CURRENT" = "$PREVIOUS" ] && break
+
+    /usr/bin/asusctl profile next >/dev/null
+    sleep 0.4
+done
+
+CURRENT="$(cat "$PROFILE")"
+
+rm -f "$STATE"
+
+case "$CURRENT" in
+    low-power)
+        NAME="CICHY"
+        ;;
+    balanced)
+        NAME="PERFORMANCE"
+        ;;
+    performance)
+        NAME="TURBO"
+        ;;
+    *)
+        NAME="$CURRENT"
+        ;;
+esac
+
+/usr/bin/notify-send \
+    "ASUS ROG — GameMode" \
+    "Gra zakończona → $NAME" 2>/dev/null || true

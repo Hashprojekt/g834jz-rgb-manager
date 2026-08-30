@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Następny profil ASUS
+asusctl profile next
+
+# Chwila na zastosowanie profilu
+sleep 0.4
+
+# Odśwież RGB, aby HOME pokazał nowy stan
+/usr/local/bin/g834jz-rgb-profile.py >/dev/null
+
+RAW="$(cat /sys/firmware/acpi/platform_profile)"
+
+case "$RAW" in
+    quiet|low-power)
+        NAME="CICHY"
+        ;;
+    balanced)
+        NAME="PERFORMANCE"
+        ;;
+    performance)
+        NAME="TURBO"
+        ;;
+    *)
+        NAME="$RAW"
+        ;;
+esac
+
+notify-send "ASUS ROG" "Tryb: $NAME" 2>/dev/null || true
+
+echo "Tryb: $NAME  [Linux: $RAW]"

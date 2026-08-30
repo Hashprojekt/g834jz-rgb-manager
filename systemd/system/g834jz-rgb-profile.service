@@ -1,0 +1,12 @@
+[Unit]
+Description=G834JZ custom Per-Key RGB profile
+After=asusd.service asus-aura-fix.service
+Wants=asusd.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/g834jz-rgb-profile.py
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

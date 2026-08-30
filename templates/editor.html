@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ profile.name }} — G834JZ RGB Manager</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body data-page="editor" data-profile-id="{{ profile.id }}">
+  <main class="editor-shell">
+    <header class="editor-header">
+      <div class="editor-title">
+        <a class="back-link" href="/">← Profile</a>
+        <div><span class="eyebrow">EDYTOR RGB</span><h1>{{ profile.name }}</h1></div>
+      </div>
+      <div class="editor-header-actions">
+        <span class="version">v{{ app_version }}</span>
+        <button class="button" id="undoBtn">↶ Cofnij</button>
+        <button class="button" id="redoBtn">↷ Ponów</button>
+        <a class="button" href="/api/profiles/{{ profile.id }}/export">Eksportuj</a>
+      </div>
+    </header>
+
+    <section class="editor-toolbar card">
+      <div class="selection-summary"><span>Wybrane klawisze</span><strong id="selectionCount">0</strong><small id="selectionNames">Kliknij klawisze poniżej</small></div>
+      <div class="colour-control">
+        <input type="color" id="colourPicker" value="#0050ff" aria-label="Kolor">
+        <input type="text" id="hexInput" value="#0050FF" maxlength="7" spellcheck="false">
+        <div class="rgb-inputs">
+          <input id="rInput" type="number" min="0" max="255" value="0" title="R">
+          <input id="gInput" type="number" min="0" max="255" value="80" title="G">
+          <input id="bInput" type="number" min="0" max="255" value="255" title="B">
+        </div>
+        <button class="button primary" id="applyBtn">Zastosuj</button>
+      </div>
+      <div class="quick-colours" id="quickColours"></div>
+    </section>
+
+    <section class="editor-grid">
+      <div class="keyboard-column">
+        <div class="groupbar card">
+          <span class="muted">Zaznacz:</span>
+          <button class="chip" data-group="wasd">WASD</button>
+          <button class="chip" data-group="numbers">1–0</button>
+          <button class="chip" data-group="functions">F1–F12</button>
+          <button class="chip" data-group="letters">A–Z</button>
+          <button class="chip" data-group="arrows">Strzałki</button>
+          <button class="chip" data-group="modifiers">Modyfikatory</button>
+          <button class="chip" data-group="numpad">Numpad cały</button>
+          <button class="chip" data-group="numpad_ops">Operatory numpada</button>
+          <button class="chip" id="allMappedBtn">Wszystkie dostępne</button>
+          <button class="chip" id="clearSelectionBtn">Wyczyść</button>
+        </div>
+
+        <div class="keyboard-card card">
+          <div class="keyboard-legend">
+            <span><i class="legend-dot editable"></i>edytowalny</span>
+            <span><i class="legend-dot dynamic"></i>dynamiczny</span>
+            <span><i class="legend-dot unknown"></i>brak bezpiecznego mapowania</span>
+          </div>
+          <div class="keyboard-section-label">ROG / F1–F12</div>
+          <div id="functionKeyboard" class="keyboard function-keyboard"></div>
+          <div class="keyboard-section-label main-label">Klawiatura główna + numpad</div>
+          <div id="keyboard" class="keyboard main-keyboard"></div>
+        </div>
+      </div>
+
+      <aside class="side-column">
+        <section class="card side-card">
+          <div class="side-title"><div><span class="eyebrow">PALETA PROFILU</span><h2>Kolory</h2></div><span class="muted" id="paletteCount"></span></div>
+          <p class="muted compact">Kliknij kolor, aby zaznaczyć klawisze używające go. Zmiana palety działa tylko na bezpiecznie zmapowanych klawiszach.</p>
+          <div id="palette" class="palette-compact"></div>
+        </section>
+
+        <section class="card side-card">
+          <span class="eyebrow">WARSTWA DYNAMICZNA</span>
+          <h2>Chronione LED-y</h2>
+          <div class="locked-list">
+            <div><strong>M3</strong><span>RTX / temperatura</span></div>
+            <div><strong>M4</strong><span>profil ASUS</span></div>
+            <div><strong>M5</strong><span>CPU / temperatura</span></div>
+            <div><strong>HOME</strong><span>profil ASUS</span></div>
+          </div>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="/static/common.js"></script>
+  <script src="/static/editor.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+[Unit]
+Description=Apply default G834JZ RGB profile
+Before=g834jz-temp-leds.service
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/g834jz-rgb-apply-default.py
+
+[Install]
+WantedBy=default.target

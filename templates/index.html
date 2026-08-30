@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>G834JZ RGB Manager</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body data-page="dashboard">
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">ASUS ROG STRIX</div>
+        <h1>G834JZ Control Center</h1>
+        <p class="muted">RGB, temperatury, wentylatory i profile ASUS</p>
+      </div>
+      <div class="top-actions">
+        <span class="version">v{{ app_version }}</span>
+        <button class="button primary" id="newProfileBtn">＋ Nowy profil</button>
+      </div>
+    </header>
+
+    <section class="status-panel">
+      <article class="metric"><span>CPU</span><strong id="cpu">—</strong></article>
+      <article class="metric"><span>RTX 4080</span><strong id="gpu">—</strong></article>
+      <article class="metric metric-action"><span>Profil ASUS</span><strong id="asus">—</strong><button class="button small" id="asusNext">Przełącz</button></article>
+      <article class="metric"><span>RGB</span><strong id="rgb">—</strong><small id="serviceState">—</small></article>
+      <article class="metric"><span>CPU FAN</span><strong id="fanCpu">—</strong></article>
+      <article class="metric"><span>GPU FAN</span><strong id="fanGpu">—</strong></article>
+      <article class="metric"><span>MID FAN</span><strong id="fanMid">—</strong></article>
+    </section>
+
+    <section class="section-heading">
+      <div>
+        <h2>Profile RGB</h2>
+        <p class="muted">FINAL i CODZIENNY są chronione. Pozostałe możesz edytować lub kopiować.</p>
+      </div>
+    </section>
+
+    <section id="profiles" class="profile-grid"></section>
+  </main>
+
+  <dialog id="profileDialog" class="dialog">
+    <form method="dialog" class="dialog-card" id="newProfileForm">
+      <div class="dialog-title"><div><span class="eyebrow">NOWY PROFIL</span><h2>Utwórz profil RGB</h2></div><button class="icon-button" value="cancel">×</button></div>
+      <label>Nazwa<input id="newProfileName" maxlength="60" placeholder="np. Gaming" required></label>
+      <label>Profil bazowy<select id="newProfileBase"></select></label>
+      <div class="dialog-actions"><button class="button" value="cancel">Anuluj</button><button class="button primary" type="submit" value="default">Utwórz</button></div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="/static/common.js"></script>
+  <script src="/static/dashboard.js"></script>
+</body>
+</html>
